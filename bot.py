@@ -245,7 +245,8 @@ async def signal_worker(app, uid):
     while DB.is_live(uid):
         try:
             history = await fetch_history()
-            if len(history) < 50:
+            if not history:
+                log.warning("API returned no history records for user %s", uid)
                 await asyncio.sleep(POLL_SECONDS); continue
             current_issue = str(history[0]["issueNumber"])
             pending = DB.pending_signal(uid)
@@ -277,6 +278,7 @@ async def signal_worker(app, uid):
                 last_sent = DB.last_signal_source(uid)
                 if last_sent != current_issue:
                     prediction = make_prediction(history)
+                    log.info("Generated prediction for user %s using %s API records", uid, prediction.get("records_used", min(len(history), 50)))
                     target_period = str(int(current_issue) + 1)
                     level = DB.entry_level(uid)
                     values = {

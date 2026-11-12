@@ -7,7 +7,7 @@
 - Admin panel থেকে Signal/Result template, brand emoji/text, WIN/LOSS/Jackpot/Next image বদলানো
 - Botcast: Admin-এর পাঠানো text/photo/video/document সব নিবন্ধিত user-কে পাঠায়
 - User Ban/Unban, নতুন Admin যোগ, channel ID/link পরিবর্তন
-- Wingo 1M API থেকে সর্বশেষ ৫০টি record নিয়ে একটি স্পষ্ট baseline heuristic-এ Big/Small ও দুইটি number নির্বাচন
+- Wingo 1M API থেকে যতগুলো record পাওয়া যায় (সর্বোচ্চ ৫০টি) নিয়ে baseline heuristic-এ Big/Small ও দুইটি number নির্বাচন; ৫০টি record বাধ্যতামূলক নয়
 - Result API-তে target period দেখা দিলে WIN/LOSS/Number Jackpot নির্ধারণ
 - WIN বা Number Jackpot হলে Entry Level 1; LOSS হলে পরের level
 - ৬টি consecutive loss-level পার হলে সেশন ১ ঘণ্টা cooldown-এ যায়
@@ -16,7 +16,7 @@
 - SQLite persistent database; Firebase বাধ্যতামূলক নয়
 
 ## Prediction সম্পর্কে গুরুত্বপূর্ণ সতর্কতা
-এই project-এর default strategy হলো গত ৫০টি ফলাফলের Big/Small frequency এবং ওই side-এর সবচেয়ে বেশি আসা দুইটি number বেছে নেওয়া। এটি একটি স্বচ্ছ baseline heuristic; lottery/বেটিং ফলাফল random হতে পারে, তাই এটি নির্ভরযোগ্য ভবিষ্যদ্বাণী বা নিশ্চিত জয়ের পদ্ধতি নয়। কোনো win-rate বা profit guarantee নেই। বাস্তব API result দিয়েই outcome যাচাই হয়।
+এই project-এর default strategy হলো API থেকে পাওয়া সর্বশেষ সর্বোচ্চ ৫০টি ফলাফলের Big/Small frequency (১টি বা তার বেশি রেকর্ড থাকলেই চলে) এবং ওই side-এর সবচেয়ে বেশি আসা দুইটি number বেছে নেওয়া। এটি একটি স্বচ্ছ baseline heuristic; lottery/বেটিং ফলাফল random হতে পারে, তাই এটি নির্ভরযোগ্য ভবিষ্যদ্বাণী বা নিশ্চিত জয়ের পদ্ধতি নয়। কোনো win-rate বা profit guarantee নেই। বাস্তব API result দিয়েই outcome যাচাই হয়।
 
 ## Setup
 1. Python 3.10+ ইনস্টল করুন।
